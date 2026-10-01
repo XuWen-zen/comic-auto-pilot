@@ -1,0 +1,17 @@
+# ==============================================================================
+#  Comic-Auto-Pilot —— 前端控制器依赖（仅 3 个直接依赖，约 80MB）
+# ==============================================================================
+#  重要架构约定：
+#    本项目与 ComfyUI 之间只有 HTTP 一条通路（127.0.0.1:8188），Python 层零耦合。
+#    因此这里【绝对不要】出现 torch / xformers / diffusers 等任何重型推理依赖。
+#    ComfyUI 请继续使用它自己的独立 venv（例如 C:\ai\ComfyUI\venv），互不干扰。
+#
+#  安装：
+#    python -m venv venv
+#    venv\Scripts\activate          (Windows)   /   source venv/bin/activate  (Linux)
+#    pip install -r requirements.txt
+# ==============================================================================
+
+gradio>=6.0,<7.0        # 本地网页外壳（纯本地监听 127.0.0.1，share=False）
+requests>=2.31          # 与 Ollama / ComfyUI 通信
+pillow>=10.0            # 解码 ComfyUI 回传的成品字节流 + 绘制中文对话气泡

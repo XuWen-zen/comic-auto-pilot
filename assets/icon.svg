@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512"
+     role="img" aria-labelledby="t d">
+  <title id="t">Comic-Auto-Pilot</title>
+  <desc id="d">一张 1x4 竖排四格条漫,第二格带中文对话气泡,第四格是蓝鲸尾鳍</desc>
+
+  <defs>
+    <!-- 底色:取自角色女仆装的深海军蓝 -->
+    <linearGradient id="cap-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1B2C5E"/>
+      <stop offset="0.55" stop-color="#101C3D"/>
+      <stop offset="1" stop-color="#070C1C"/>
+    </linearGradient>
+
+    <!-- 分格底色:取自角色的渐变蓝发 -->
+    <linearGradient id="cap-panel" x1="0" y1="0" x2="0.25" y2="1">
+      <stop offset="0" stop-color="#9BE8FF"/>
+      <stop offset="0.5" stop-color="#43A8F0"/>
+      <stop offset="1" stop-color="#1B55C4"/>
+    </linearGradient>
+
+    <!-- 金色描边:取自女仆装的 gold trim -->
+    <linearGradient id="cap-gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F3D99A"/>
+      <stop offset="0.5" stop-color="#D9AE55"/>
+      <stop offset="1" stop-color="#F0D28C"/>
+    </linearGradient>
+
+    <!-- 让分格在深底上微微发光,小尺寸下轮廓更清楚 -->
+    <filter id="cap-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10"
+                    flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <!-- 圆角方底 -->
+  <rect width="512" height="512" rx="112" fill="url(#cap-bg)"/>
+
+  <!-- 条漫外框(金线) -->
+  <rect x="100" y="38" width="312" height="436" rx="24"
+        fill="none" stroke="url(#cap-gold)" stroke-width="5" opacity="0.9"/>
+
+  <!-- 1x4 四格:等高 94,格间留 12 的白边间隙,与成品 20px 格边同构 -->
+  <g filter="url(#cap-glow)">
+    <rect x="112" y="50"  width="288" height="94" rx="12" fill="url(#cap-panel)"/>
+    <rect x="112" y="156" width="288" height="94" rx="12" fill="url(#cap-panel)"/>
+    <rect x="112" y="262" width="288" height="94" rx="12" fill="url(#cap-panel)"/>
+    <rect x="112" y="368" width="288" height="94" rx="12" fill="url(#cap-panel)"/>
+  </g>
+
+  <!-- 第 1 格:三条留白,暗示"画面已生成" -->
+  <g fill="#FFFFFF" opacity="0.34">
+    <rect x="140" y="74"  width="150" height="11" rx="5.5"/>
+    <rect x="140" y="96"  width="196" height="11" rx="5.5"/>
+    <rect x="140" y="118" width="118" height="11" rx="5.5"/>
+  </g>
+
+  <!-- 第 2 格:中文对话气泡(本项目的招牌能力) -->
+  <g>
+    <polygon points="190,210 222,210 166,248" fill="#FFFFFF"/>
+    <rect x="146" y="166" width="170" height="52" rx="26" fill="#FFFFFF"/>
+    <g fill="#16244F">
+      <circle cx="196" cy="192" r="8"/>
+      <circle cx="231" cy="192" r="8"/>
+      <circle cx="266" cy="192" r="8"/>
+    </g>
+  </g>
+
+  <!-- 第 3 格:漫画速度线(倾斜,与第 1 格的文字留白明确区分) -->
+  <g stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity="0.42">
+    <line x1="332" y1="282" x2="248" y2="296"/>
+    <line x1="332" y1="308" x2="196" y2="330"/>
+    <line x1="300" y1="336" x2="228" y2="348"/>
+  </g>
+
+  <!-- 第 4 格:大肥鱼本人(整只鲸鱼剪影,朝左)。
+       这里特意画整只而不是只画尾鳍 —— 光秃秃的尾鳍在 24px 图标尺寸下
+       会退化成"对勾"或"下载箭头",而带眼睛的完整鲸鱼轮廓一眼可辨。 -->
+  <g fill="#FFFFFF" opacity="0.96">
+    <path d="M170 416
+             C172 398 196 386 228 386
+             C266 386 292 398 302 412
+             C318 398 332 386 344 380
+             C340 396 332 408 322 416
+             C332 424 340 436 344 452
+             C332 446 318 434 302 420
+             C292 436 266 446 228 446
+             C196 446 172 434 170 416 Z"/>
+  </g>
+  <circle cx="201" cy="409" r="7" fill="#16244F"/>
+</svg>

@@ -1,0 +1,479 @@
+{
+  "1": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "illustriousXL_v01.safetensors"
+    },
+    "_meta": {
+      "title": "底模 Illustrious-XL"
+    }
+  },
+  "2": {
+    "class_type": "LoraLoader",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "clip": [
+        "1",
+        1
+      ],
+      "lora_name": "deepseek_maid_outfit_illustrious_v10.safetensors",
+      "strength_model": 1.0,
+      "strength_clip": 1.0
+    },
+    "_meta": {
+      "title": "LoRA 蓝色大肥鱼女仆"
+    }
+  },
+  "3": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "2",
+        1
+      ],
+      "text": "worst quality, low quality, normal quality, lowres, bad anatomy, bad hands, error, missing fingers, extra digits, fewer digits, cropped, jpeg artifacts, signature, watermark, username, blurry, bad feet."
+    },
+    "_meta": {
+      "title": "Negative 共享负向（勿改名，含 panel 字样会被误认）"
+    }
+  },
+  "4": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 832,
+      "height": 1216,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "空 Latent 832x1216"
+    }
+  },
+  "5": {
+    "class_type": "UpscaleModelLoader",
+    "inputs": {
+      "model_name": "4x-UltraSharp.pth"
+    },
+    "_meta": {
+      "title": "4x-UltraSharp 放大模型"
+    }
+  },
+  "110": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "2",
+        1
+      ],
+      "text": "PLACEHOLDER_WILL_BE_REPLACED_BY_OLLAMA"
+    },
+    "_meta": {
+      "title": "panel_1 正向提示词"
+    }
+  },
+  "111": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "2",
+        0
+      ],
+      "positive": [
+        "110",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "4",
+        0
+      ],
+      "seed": 1088840937755406,
+      "steps": 25,
+      "cfg": 8.0,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "panel_1 KSampler"
+    }
+  },
+  "112": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "111",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "panel_1 VAEDecode"
+    }
+  },
+  "113": {
+    "class_type": "ImageUpscaleWithModel",
+    "inputs": {
+      "upscale_model": [
+        "5",
+        0
+      ],
+      "image": [
+        "112",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "panel_1 4x-UltraSharp 重构"
+    }
+  },
+  "114": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": [
+        "113",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "width": 1024,
+      "height": 1497,
+      "crop": "disabled"
+    },
+    "_meta": {
+      "title": "panel_1 回落 1024x1497"
+    }
+  },
+  "120": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "2",
+        1
+      ],
+      "text": "PLACEHOLDER_WILL_BE_REPLACED_BY_OLLAMA"
+    },
+    "_meta": {
+      "title": "panel_2 正向提示词"
+    }
+  },
+  "121": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "2",
+        0
+      ],
+      "positive": [
+        "120",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "4",
+        0
+      ],
+      "seed": 1088840937755407,
+      "steps": 25,
+      "cfg": 8.0,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "panel_2 KSampler"
+    }
+  },
+  "122": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "121",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "panel_2 VAEDecode"
+    }
+  },
+  "123": {
+    "class_type": "ImageUpscaleWithModel",
+    "inputs": {
+      "upscale_model": [
+        "5",
+        0
+      ],
+      "image": [
+        "122",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "panel_2 4x-UltraSharp 重构"
+    }
+  },
+  "124": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": [
+        "123",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "width": 1024,
+      "height": 1497,
+      "crop": "disabled"
+    },
+    "_meta": {
+      "title": "panel_2 回落 1024x1497"
+    }
+  },
+  "130": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "2",
+        1
+      ],
+      "text": "PLACEHOLDER_WILL_BE_REPLACED_BY_OLLAMA"
+    },
+    "_meta": {
+      "title": "panel_3 正向提示词"
+    }
+  },
+  "131": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "2",
+        0
+      ],
+      "positive": [
+        "130",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "4",
+        0
+      ],
+      "seed": 1088840937755408,
+      "steps": 25,
+      "cfg": 8.0,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "panel_3 KSampler"
+    }
+  },
+  "132": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "131",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "panel_3 VAEDecode"
+    }
+  },
+  "133": {
+    "class_type": "ImageUpscaleWithModel",
+    "inputs": {
+      "upscale_model": [
+        "5",
+        0
+      ],
+      "image": [
+        "132",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "panel_3 4x-UltraSharp 重构"
+    }
+  },
+  "134": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": [
+        "133",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "width": 1024,
+      "height": 1497,
+      "crop": "disabled"
+    },
+    "_meta": {
+      "title": "panel_3 回落 1024x1497"
+    }
+  },
+  "140": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "2",
+        1
+      ],
+      "text": "PLACEHOLDER_WILL_BE_REPLACED_BY_OLLAMA"
+    },
+    "_meta": {
+      "title": "panel_4 正向提示词"
+    }
+  },
+  "141": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "2",
+        0
+      ],
+      "positive": [
+        "140",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "4",
+        0
+      ],
+      "seed": 1088840937755409,
+      "steps": 25,
+      "cfg": 8.0,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "panel_4 KSampler"
+    }
+  },
+  "142": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "141",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "panel_4 VAEDecode"
+    }
+  },
+  "143": {
+    "class_type": "ImageUpscaleWithModel",
+    "inputs": {
+      "upscale_model": [
+        "5",
+        0
+      ],
+      "image": [
+        "142",
+        0
+      ]
+    },
+    "_meta": {
+      "title": "panel_4 4x-UltraSharp 重构"
+    }
+  },
+  "144": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": [
+        "143",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "width": 1024,
+      "height": 1497,
+      "crop": "disabled"
+    },
+    "_meta": {
+      "title": "panel_4 回落 1024x1497"
+    }
+  },
+  "301": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "114",
+        0
+      ],
+      "filename_prefix": "cap_panel_1"
+    },
+    "_meta": {
+      "title": "panel_1 Save"
+    }
+  },
+  "302": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "124",
+        0
+      ],
+      "filename_prefix": "cap_panel_2"
+    },
+    "_meta": {
+      "title": "panel_2 Save"
+    }
+  },
+  "303": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "134",
+        0
+      ],
+      "filename_prefix": "cap_panel_3"
+    },
+    "_meta": {
+      "title": "panel_3 Save"
+    }
+  },
+  "304": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "144",
+        0
+      ],
+      "filename_prefix": "cap_panel_4"
+    },
+    "_meta": {
+      "title": "panel_4 Save"
+    }
+  }
+}

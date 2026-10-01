@@ -1,0 +1,26 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# ---- 虚拟环境 ----
+# 本项目的轻量 venv（gradio/requests/pillow）。
+# 注意：ComfyUI 有它自己独立的 venv（如 C:\ai\ComfyUI\venv），两者互不相干，
+#       都不应进入版本库。
+venv/
+.venv/
+env/
+
+# ---- 生成的漫画成品（创意资产，只留在本地硬盘）----
+outputs/
+
+# ---- 编辑器 / 工具 / 系统 ----
+.vscode/
+.idea/
+# Claude Code 的本机权限配置,与项目无关
+# 注意:.gitignore 不支持行尾注释,注释必须独占一行
+.claude/
+Thumbs.db
+desktop.ini
+.DS_Store
